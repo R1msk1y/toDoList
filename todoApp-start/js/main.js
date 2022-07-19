@@ -8,6 +8,7 @@ let mainArray = [];
 
 form.addEventListener(`submit`, addTask);
 tasksList.addEventListener(`click`, delTask);
+tasksList.addEventListener(`click`, doneTask);
 
 
 //Function
@@ -53,5 +54,36 @@ if(tasksList.children.length > 1){
     emptyList.classList.add(`none`);
 }
 
+};
+
+function delTask (event){
+
+if(event.target.dataset.action === `delete`){
+
+
+    const taskForDelete = event.target.closest(`.list-group-item`);
+    taskForDelete.remove();
+
+    if(tasksList.children.length === 1){
+        emptyList.classList.remove(`none`);
+    }
+
+
 }
+
+};
+
+function doneTask (event){
+
+    if(event.target.dataset.action === `done`){
+
+        const currentTaskStatusParent = event.target.closest(`.list-group-item`);
+
+        const currentTaskStatus = currentTaskStatusParent.querySelector(`.task-title`);
+
+        currentTaskStatus.classList.toggle(`task-title--done`);
+    }
+
+};
+
 
